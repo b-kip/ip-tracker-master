@@ -1,0 +1,21 @@
+@use '../abstract' as *;
+
+body {
+  color: var(--clr-dark-gray);
+  font-family: var(--ff);
+}
+
+h1 {
+  color: var(--clr-white);
+  font-size: 1.45rem;
+  font-weight: var(--fw-medium);
+
+  @include mediumscreen {
+    font-size: 1.7rem;
+    line-height: 1.4;
+  }
+
+  @include largescreen {
+    font-size: 2rem;
+  }
+}

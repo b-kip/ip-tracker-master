@@ -1,0 +1,84 @@
+@use '../abstract' as *;
+
+.page-intro {
+  background-image: url('../../assets/images/pattern-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top right -444px;
+  text-align: center;
+  padding-top: 0.75rem;
+  height: 14.6rem;
+
+  @include smallscreen {
+    padding-top: 1rem;
+  }
+  
+  @include mediumscreen {
+    padding-top: 1.25rem;
+    background-position: center;
+    height: 15.6rem;
+  }
+
+  @include largescreen {
+    padding-top: 1.5rem;
+    background-size: cover;
+    background-position: center;
+    height: 16rem;
+  }
+
+  .container {
+    --flow-spacer: 0.5rem;
+
+    @include smallscreen {
+      --flow-spacer: 1rem;
+    }
+
+    @include mediumscreen {
+      --flow-spacer: 1.25rem;
+    }
+
+    @include largescreen {
+      --flow-spacer: 1.5rem;
+    }
+  }
+  
+  .ip-input-form {
+    display: flex;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: .5rem;
+    overflow: hidden;
+
+    .ip-input {
+      font-size: 1rem;
+      padding-left: 1.5rem;
+      border: none;
+      width: 100%;
+
+      @include smallscreen {
+        font-size: 1.1rem;
+      }
+
+      @include mediumscreen {
+        font-size: 1.125rem;
+      }
+    }
+
+    .btn {
+      background-color: black;
+      padding: .6rem 1.125rem;
+      border: none;
+
+      &:focus,
+      &:hover {
+        cursor: pointer;
+        background-color: var(--clr-very-dark-gray);
+      }
+
+      svg {
+        margin-top: 6px;
+      }
+    }
+  }
+}

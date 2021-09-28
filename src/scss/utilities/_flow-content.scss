@@ -1,0 +1,6 @@
+.flow-content {
+  --flow-spacer: 1rem;
+  > * + * {
+    margin-top: var(--flow-spacer);
+  }
+}

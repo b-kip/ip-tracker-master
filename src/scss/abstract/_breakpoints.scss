@@ -1,0 +1,20 @@
+@mixin smallscreen {
+  @media (min-width: 576px) {
+    @content;
+  }
+}
+@mixin mediumscreen {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+@mixin largescreen {
+  @media (min-width: 1000px) {
+    @content;
+  }
+}
+@mixin  xlargescreen {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
