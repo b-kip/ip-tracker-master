@@ -39,6 +39,3 @@ yarn-error.log*
 
 # Ignore IDE specific files
 .vscode/
-
-# previous js implementations
-js

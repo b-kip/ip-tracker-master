@@ -1,13 +1,20 @@
 import Map from '../Map';
 import TextResults from './TextResults';
 
-export default function Results() {
+export default function Results({ ipInfo }) {
   return (
     <div className="results">
       <div className="container">
-        <TextResults />
+        {
+          ipInfo.textInfo &&
+          <TextResults textInfo={ipInfo.textInfo}/>
+
+        }
       </div>
-      <Map />
+      {
+        ipInfo.coordinates &&
+        <Map coordinates={ipInfo.coordinates}/>
+      }
     </div>
   );
 }
