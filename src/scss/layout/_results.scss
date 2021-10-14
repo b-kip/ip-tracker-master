@@ -126,9 +126,14 @@
     }
   }
 
-  &__map, #mapid {
-    height: calc(100vh - 14.6rem);
-    position: relative;
-    z-index: 10;
+  &__map {
+    &-container {
+      height: calc(100vh - 14.6rem);
+      position: relative;
+      z-index: 10;
+    }
+    &__item {
+      height: 100%;
+    }
   }
 }

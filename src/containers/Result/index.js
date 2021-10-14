@@ -6,15 +6,16 @@ export default function Results({ ipInfo }) {
     <div className="results">
       <div className="container">
         {
-          ipInfo.textInfo &&
-          <TextResults textInfo={ipInfo.textInfo}/>
-
+          // ipInfo.textInfo &&
+          // <TextResults textInfo={ipInfo.textInfo}/>
         }
+        <TextResults textInfo={ipInfo.textInfo}/>
       </div>
       {
-        ipInfo.coordinates &&
-        <Map coordinates={ipInfo.coordinates}/>
+        // ipInfo.coordinates &&
+        // <Map coordinates={ipInfo.coordinates}/>
       }
+      <Map coordinates={ipInfo.coordinates}/>
     </div>
   );
 }
