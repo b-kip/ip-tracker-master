@@ -44,17 +44,28 @@
   
   .ip-input-form {
     display: flex;
-    max-width: 550px;
-    margin-left: auto;
-    margin-right: auto;
     border-radius: .5rem;
-    overflow: hidden;
+    
+    &-container {
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+    }
+    
 
     .ip-input {
       font-size: 1rem;
       padding-left: 1.5rem;
       border: none;
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
       width: 100%;
+
+      &:focus,
+      &:active {
+        outline: 0;
+      }
 
       @include smallscreen {
         font-size: 1.1rem;
@@ -65,10 +76,18 @@
       }
     }
 
+    &.error .ip-input {
+      border: 2px solid #ff8876;
+      border-top-left-radius: .5rem;
+      border-bottom-left-radius: .5rem;
+    }
+
     .btn {
       background-color: black;
       padding: .6rem 1.125rem;
       border: none;
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
 
       &:focus,
       &:hover {
@@ -80,5 +99,11 @@
         margin-top: 6px;
       }
     }
+  }
+  
+  .error-message {
+    color: #ff8876;
+    margin-top: 0.25rem;
+    font-style: italic;
   }
 }

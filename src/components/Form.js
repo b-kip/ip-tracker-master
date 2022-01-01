@@ -1,30 +1,45 @@
 import { useState } from 'react';
+import { IpRegex, domainRegex } from '../api/fetchIpLocation';
 
 import { ReactComponent as ArrowIcon} from '../assets/images/icon-arrow.svg';
 
 export default function Form({ onSubmit }) { 
   const [ input, setInput ] = useState("");
+  const [isValid, setIsValid] = useState(true);
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(input);
+    if ( isInputValid(input) ) {
+      console.log("Valid input");
+      setIsValid(true);
+      onSubmit(input);
+    } else {
+      console.log("Invalid input");
+      setIsValid(false);
+    }
+  }
+
+  function isInputValid(input) {
+    return ( IpRegex.test(input) || domainRegex.test(input));
   }
 
   return (
-    <form className="ip-input-form" onSubmit={handleSubmit}>
-      <input 
-        className="ip-input" 
-        type="text"
-        value={input}
-        name="ip" 
-        placeholder="Search for any IP address or domain" 
-        pattern="^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\.(?!$)|$)){4}$"
-        required
-        onChange={(e) => {setInput(e.target.value)}}
-      />
-      <button className="btn btn-submit">
-        <ArrowIcon />
-      </button>
-    </form>
+    <div className="ip-input-form-container">
+      <form className={`ip-input-form ${ !isValid ? 'error' : ''}`} onSubmit={handleSubmit}>
+        <input 
+          className="ip-input" 
+          type="text"
+          value={input}
+          name="ip" 
+          placeholder="Search for any IP address or domain"
+          required
+          onChange={(e) => {setInput(e.target.value)}}
+        />
+        <button type="submit" className="btn btn-submit">
+          <ArrowIcon />
+        </button>
+      </form>
+      {/* {!isValid && (<p className="error-message">Enter a valid IP Address or domain</p>)} */}
+    </div>
   );
 }

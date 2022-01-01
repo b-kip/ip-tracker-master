@@ -23,8 +23,6 @@ function App() {
     // }
   });
 
-  var obj = '{"[Op.or]":1, "name": "Allan"}';
-  console.log(JSON.parse(obj,  (key, value) => value));
 
   useEffect(() => {
     async function fetch(){
