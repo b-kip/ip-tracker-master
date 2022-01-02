@@ -17,6 +17,7 @@ export default function Form({ onSubmit }) {
       console.log("Invalid input");
       setIsValid(false);
     }
+    // onSubmit(input);
   }
 
   function isInputValid(input) {
@@ -26,6 +27,7 @@ export default function Form({ onSubmit }) {
   return (
     <div className="ip-input-form-container">
       <form className={`ip-input-form ${ !isValid ? 'error' : ''}`} onSubmit={handleSubmit}>
+      {/* <form className={`ip-input-form`} onSubmit={handleSubmit}> */}
         <input 
           className="ip-input" 
           type="text"
@@ -39,7 +41,7 @@ export default function Form({ onSubmit }) {
           <ArrowIcon />
         </button>
       </form>
-      {/* {!isValid && (<p className="error-message">Enter a valid IP Address or domain</p>)} */}
+      {!isValid && (<p className="error-message">Input a valid IP Address or domain</p>)}
     </div>
   );
 }

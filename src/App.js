@@ -7,29 +7,62 @@ import fetchIpLocation from './api/fetchIpLocation';
 function App() {
   const [ip, setIp] = useState('');
   const [ipInfo, setIpInfo] = useState({
-    // coordinates: {lat: 37.38605, lng: -122.08385},
-    coordinates: {lat: null, lng: null},
-    textInfo: {
-      location: '',
-      timezone: '',
-      isp: '',
-      ip: ''
-    }
-    // textInfo: {
-    //   location: 'California, Mountain View',
-    //   timezone: 'UTC-07:00',
-    //   isp: 'Google LLC',
-    //   ip: '8.8.8.8'
-    // }
+    data: {
+      coordinates: {lat: null, lng: null},
+      textInfo: {
+        location: '',
+        timezone: '',
+        isp: '',
+        ip: ''
+      }
+    },
+    error: {
+      isError: false,
+      message: ""
+    },
+    isLoading: false,
   });
 
 
   useEffect(() => {
     async function fetch(){
         // console.log('Should fetch');
+      try {
+        setIpInfo({
+          ...ipInfo,
+          isLoading: true
+        })
         const ipData = await fetchIpLocation(ip);
         // console.log(ipData);
-        setIpInfo(ipData);
+        setIpInfo({
+          ...ipInfo,
+          data: ipData,
+          error: {
+            isError: false,
+            message:""
+          },
+          isLoading: false
+        });
+      } catch (e) {
+        setIpInfo(
+          {
+            data: {
+              coordinates: {lat: null, lng: null},
+              textInfo: {
+                location: '',
+                timezone: '',
+                isp: '',
+                ip: ''
+              }
+            },
+            error: {
+              isError: true,
+              message: e.message
+            },
+            isLoading: false
+          }
+        )
+      }
     };
     fetch();
   }, [ip]);

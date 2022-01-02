@@ -1,6 +1,6 @@
 import TextResultItem from "../../components/TextResultItem";
 
-export default function TextResults({ textInfo }) {
+export default function TextResults({ textInfo, isLoading }) {
   const textResultsList = [
     {
       title: 'IP Address',
@@ -24,7 +24,7 @@ export default function TextResults({ textInfo }) {
     <div className="results__info-container">
       {
         textResultsList.map((textResult, index) => (
-          <TextResultItem key={index} {...textResult}/>
+          <TextResultItem key={index} {...textResult} isLoading={isLoading}/>
         ))
       }
     </div>

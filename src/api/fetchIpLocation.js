@@ -5,28 +5,39 @@ export const domainRegex = /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/;
 export default async function fetchIpLocation(ip) {
   let url = `${API_URL}apiKey=${process.env.REACT_APP_API_KEY}`;
 
-  if ( IpRegex.test(ip)) {
-    url += `&ipAddress=${ip}`;
-  }
-  if ( domainRegex.test(ip)) {
-    url += `&domain=${ip}`;
+  if(ip) {
+    if ( IpRegex.test(ip)) {
+      url += `&ipAddress=${ip}`;
+    }else if ( domainRegex.test(ip)) {
+      url += `&domain=${ip}`;
+    }else{
+      throw new Error('Enter a valid IP address or domain');
+    }
   }
 
   try {
     const response = await fetch(url);
-    let data = await response.json();
-    console.log("success", data);
-    const { location: { city, region, lat, lng, timezone }, isp,ip } = data;
-    return {
-      coordinates: {lat, lng},
-      textInfo: {
-        location: `${region}, ${city}`,
-        timezone: `UTC${timezone}`,
-        isp,
-        ip
+    console.log(response);
+
+    if (response.statusText === "OK") {
+      let data = await response.json();
+      console.log("success", data);
+      const { location: { city, region, lat, lng, timezone }, isp, ip } = data;
+      return {
+        coordinates: {lat, lng},
+        textInfo: {
+          location: `${region}, ${city}`,
+          timezone: `UTC${timezone}`,
+          isp,
+          ip
+        }
       }
+    } else {
+      throw new Error(response.statusText);
+      // console.log(response.statusText);
     }
   } catch (error) {
-    console.log(error)
+    // console.log(error.message);
+    throw new Error(`${error.message}. Enter a valid IP address or domain.`);
   }
 }

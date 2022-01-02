@@ -2,20 +2,24 @@ import Map from '../Map';
 import TextResults from './TextResults';
 
 export default function Results({ ipInfo }) {
+  const { data, error, isLoading } = ipInfo;
+  const { isError, message} = error;
+
   return (
     <div className="results">
       <div className="container">
-        {
-          // ipInfo.textInfo &&
-          // <TextResults textInfo={ipInfo.textInfo}/>
-        }
-        <TextResults textInfo={ipInfo.textInfo}/>
+        
+          {
+            isError
+            ? (
+              <div className="results__status-container">
+                <p className="error-message text">{message}</p>
+              </div>
+            )
+            : <TextResults textInfo={data.textInfo} isLoading={isLoading}/>
+          }
       </div>
-      {
-        // ipInfo.coordinates &&
-        // <Map coordinates={ipInfo.coordinates}/>
-      }
-      <Map coordinates={ipInfo.coordinates}/>
+      <Map coordinates={data.coordinates} isLoading={isLoading}/>
     </div>
   );
 }

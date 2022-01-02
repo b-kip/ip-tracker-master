@@ -7,8 +7,10 @@
     z-index: 100;
   }
 
-  &__info-container {
+  &__info-container,
+  &__status-container {
     text-align: center;
+    font-size: 1.125rem;
     background-color: white;
     padding: 1rem;
     border-radius: .95rem;
@@ -59,6 +61,9 @@
     }
   }
 
+  &__status-container {
+    display: block;
+  }
   &__item {
     --flow-spacer: 0rem;
     // border: 1px solid red;
@@ -105,25 +110,6 @@
         font-size: 0.75rem;
       }
     }
-    
-    &__value {
-      color: var(--clr-very-dark-gray);
-      font-size: 1.125rem;
-      line-height: 1.15;
-      font-weight: var(--fw-medium);
-      
-      @include mediumscreen {
-        font-size: 1.25rem;
-      }
-
-      @include largescreen {
-        font-size: 1.35rem;
-      }
-
-      @include xlargescreen {
-        font-size: 1.5rem;
-      }
-    }
   }
 
   &__map {
@@ -135,5 +121,31 @@
     &__item {
       height: 100%;
     }
+  }
+
+  .text {
+    color: var(--clr-very-dark-gray);
+    font-size: 1.125rem;
+    line-height: 1.15;
+    font-weight: var(--fw-medium);
+    
+    @include mediumscreen {
+      font-size: 1.25rem;
+    }
+
+    @include largescreen {
+      font-size: 1.35rem;
+    }
+
+    @include xlargescreen {
+      font-size: 1.5rem;
+    }
+  }
+
+  .error-message {
+    color: #ff8876;
+    font-style: italic;
+    text-align: center;
+    // font-size: 1.5rem;
   }
 }
