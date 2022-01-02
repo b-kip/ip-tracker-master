@@ -6,7 +6,7 @@ import iconImage from '../../assets/images/icon-location.svg';
 import ChangeView from './ChangeView';
 
 
-export default function Map({ coordinates, isLoading }) {
+export default function Map({ coordinates, isLoading, isError }) {
   let icon = L.icon({
     iconUrl: iconImage,
     iconSize: [46, 56],
@@ -21,7 +21,7 @@ export default function Map({ coordinates, isLoading }) {
         isLoading
         ? (<Skeleton className="results__map__item"/>)
         : (
-          (coordinates.lat && coordinates.lng) 
+          !isError 
           ? (
             <MapContainer 
             center={coordinates} zoom={zoom} scrollWheelZoom={false} 

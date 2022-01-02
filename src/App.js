@@ -1,69 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import Results from './containers/Result';
 import Form from './components/Form';
 
 import fetchIpLocation from './api/fetchIpLocation';
+import ipInfoReducer, { initialState } from './ipInfoReducer';
 
 function App() {
   const [ip, setIp] = useState('');
-  const [ipInfo, setIpInfo] = useState({
-    data: {
-      coordinates: {lat: null, lng: null},
-      textInfo: {
-        location: '',
-        timezone: '',
-        isp: '',
-        ip: ''
-      }
-    },
-    error: {
-      isError: false,
-      message: ""
-    },
-    isLoading: false,
-  });
+  const [ipInfo, dispatchIpInfo] = useReducer(ipInfoReducer, initialState);
 
 
   useEffect(() => {
     async function fetch(){
-        // console.log('Should fetch');
+      dispatchIpInfo({ type: 'IPINFO_FETCH_INIT'});
+
       try {
-        setIpInfo({
-          ...ipInfo,
-          isLoading: true
-        })
         const ipData = await fetchIpLocation(ip);
-        // console.log(ipData);
-        setIpInfo({
-          ...ipInfo,
-          data: ipData,
-          error: {
-            isError: false,
-            message:""
-          },
-          isLoading: false
+
+        dispatchIpInfo({ 
+          type: 'IPINFO_FETCH_SUCCESS',
+          payload: { ipData }
         });
       } catch (e) {
-        setIpInfo(
-          {
-            data: {
-              coordinates: {lat: null, lng: null},
-              textInfo: {
-                location: '',
-                timezone: '',
-                isp: '',
-                ip: ''
-              }
-            },
-            error: {
-              isError: true,
-              message: e.message
-            },
-            isLoading: false
+        dispatchIpInfo({
+          type: 'IPINFO_FETCH_FAILURE',
+          payload: { 
+            error : { message: e.message }
           }
-        )
+        });
       }
     };
+    
     fetch();
   }, [ip]);
 

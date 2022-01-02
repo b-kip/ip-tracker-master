@@ -19,7 +19,7 @@ export default function Results({ ipInfo }) {
             : <TextResults textInfo={data.textInfo} isLoading={isLoading}/>
           }
       </div>
-      <Map coordinates={data.coordinates} isLoading={isLoading}/>
+      <Map coordinates={data.coordinates} isLoading={isLoading} isError={isError}/>
     </div>
   );
 }
