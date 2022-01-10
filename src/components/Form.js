@@ -3,6 +3,10 @@ import { IpRegex, domainRegex } from '../api/fetchIpLocation';
 
 import { ReactComponent as ArrowIcon} from '../assets/images/icon-arrow.svg';
 
+/**
+ * Allows user to input ip address and domain, handles input validation and submission
+ * @param {handleSubmit} onSubmit - The callback that updates ip address or domain
+ */
 export default function Form({ onSubmit }) { 
   const [ input, setInput ] = useState("");
   const [isValid, setIsValid] = useState(true);
@@ -24,6 +28,7 @@ export default function Form({ onSubmit }) {
     return ( IpRegex.test(input) || domainRegex.test(input));
   }
 
+  // console.log("Form rendered");
   return (
     <div className="ip-input-form-container">
       <form className={`ip-input-form ${ !isValid ? 'error' : ''}`} onSubmit={handleSubmit}>

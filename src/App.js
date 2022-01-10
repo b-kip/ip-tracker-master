@@ -34,6 +34,11 @@ function App() {
     fetch();
   }, [ip]);
 
+  /**
+   * Callback that updates the ip address or domain.
+   * @callback handleSubmit
+   * @param {string} value - ip address or domain
+   */
   function handleSubmit(value){
     setIp(value);
   }

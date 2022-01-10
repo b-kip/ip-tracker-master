@@ -5,6 +5,7 @@ export default function Results({ ipInfo }) {
   const { data, error, isLoading } = ipInfo;
   const { isError, message} = error;
 
+  // console.log("Result container rendering");
   return (
     <div className="results">
       <div className="container">
