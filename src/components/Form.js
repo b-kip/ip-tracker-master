@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IpRegex, domainRegex } from '../api/fetchIpLocation';
 
 import { ReactComponent as ArrowIcon} from '../assets/images/icon-arrow.svg';
@@ -10,6 +10,13 @@ import { ReactComponent as ArrowIcon} from '../assets/images/icon-arrow.svg';
 export default function Form({ onSubmit }) { 
   const [ input, setInput ] = useState("");
   const [isValid, setIsValid] = useState(true);
+
+  function handleInputChange(e) {
+    setInput(e.target.value)
+    if (!isValid) {
+      setIsValid(true);
+    }
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -39,14 +46,21 @@ export default function Form({ onSubmit }) {
           value={input}
           name="ip" 
           placeholder="Search for any IP address or domain"
-          required
-          onChange={(e) => {setInput(e.target.value)}}
+          // required
+          onChange={handleInputChange}
         />
         <button type="submit" className="btn btn-submit">
           <ArrowIcon />
         </button>
       </form>
-      {!isValid && (<p className="error-message">Input a valid IP Address or domain</p>)}
+      {!isValid && (
+        <p 
+          className="error-message"
+          role="alert"
+        >
+          Input a valid IP Address or domain
+        </p>
+      )}
     </div>
   );
 }
