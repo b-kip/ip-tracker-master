@@ -11,7 +11,11 @@ export default function TextResultItem({ title, value, isLoading }) {
     <div className="results__item results__ip-address  flow-content">
       <h3 className="results__item__title">{title}</h3>
       <p className="results__item__value text">
-        {isLoading ? <Skeleton /> : value}
+        {isLoading ? 
+        <span aria-label="Loading">
+          <Skeleton /> 
+        </span>
+        : value}
       </p>
     </div>
   );

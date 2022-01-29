@@ -1,35 +1,40 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render, screen } from "@testing-library/react";
 
 import TextResultItem from "./TextResultItem";
-import Skeleton from "react-loading-skeleton";
 
-// UNIT TESTING
-//input
-  // title
-  // value
-  // isLoading
+
 describe("TextResultItem", () => {
-  let component;
+  let rerender;
   let textResult = {
-    title: 'location',
-    value: 'California, Los Angeles',
-    isLoading: false
+    title: 'Location',
+    value: '',
+    isLoading: true
   };
+
   beforeEach(() => {
-    component = renderer.create(<TextResultItem {...textResult}/>);
+    rerender = render(<TextResultItem {...textResult} />).rerender;
   });
 
   it("renders result's title and value", () => {
-    expect(component.root.findByProps({className: 'results__item__title'})
-    .children).toEqual(['location']);
-    // I don't want to be including all class names.
-    expect(component.root.findByType('p')
-    .children).toEqual(['California, Los Angeles']);
-  });
+    expect(screen.getByRole('heading', {
+      name: /location/i
+    }))
+    .toBeInTheDocument();
+    expect(screen.getByLabelText(/loading/i)).toBeInTheDocument()
 
-  it('renders loading skeleton if isLoading is false', () => {
-    component.update(<TextResultItem {...textResult} isLoading={true} />);
-    expect(component.root.findAllByType(Skeleton).length).toEqual(1);
+    let updatedResults = {
+      ...textResult,
+      value: 'California, Los Angeles',
+      isLoading: false
+    };
+
+    rerender(<TextResultItem {...updatedResults} />);
+
+    // there's no delay in replacing loader with value
+    // expect(screen.getByLabelText(/loading/i)).not.toBeInTheDocument()
+
+    expect(screen.getByText(new RegExp(updatedResults.value, 'i')))
+    .toBeInTheDocument();
   });
 });
