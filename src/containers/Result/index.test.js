@@ -8,7 +8,6 @@ import Results from './index';
 // I've tested them therefore testing that they sho props would be repetition
 // in my opinion.
 
-// the error path is untested.
 const ipInfo = {
   data: {
     textInfo: {},
