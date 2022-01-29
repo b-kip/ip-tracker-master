@@ -19,11 +19,16 @@ export default function Map({ coordinates, isLoading, isError }) {
     <div className="results__map-container">
       {
         isLoading
-        ? (<Skeleton className="results__map__item"/>)
+        ? (
+        <p aria-label="Loading">
+          <Skeleton className="results__map__item"/>
+        </p>
+        )
         : (
           !isError 
           ? (
             <MapContainer 
+            role="presentation"
             center={coordinates} zoom={zoom} scrollWheelZoom={false} 
             className="results__map__item"
             >

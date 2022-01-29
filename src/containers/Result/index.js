@@ -14,7 +14,12 @@ export default function Results({ ipInfo }) {
             isError
             ? (
               <div className="results__status-container">
-                <p className="error-message text">{message}</p>
+                <div 
+                  role="alert"
+                  className="error-message text"
+                >
+                  {message}
+                </div>
               </div>
             )
             : <TextResults textInfo={data.textInfo} isLoading={isLoading}/>
