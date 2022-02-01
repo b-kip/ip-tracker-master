@@ -49,7 +49,7 @@ export default function Form({ onSubmit }) {
           // required
           onChange={handleInputChange}
         />
-        <button type="submit" className="btn btn-submit">
+        <button type="submit" className="btn btn-submit" aria-label='Submit'>
           <ArrowIcon />
         </button>
       </form>

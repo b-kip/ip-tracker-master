@@ -19,7 +19,7 @@ export default async function fetchIpLocation(ip) {
     const response = await fetch(url);
     console.log(response);
 
-    if (response.statusText === "OK") {
+    if (response.status === 200) {
       let data = await response.json();
       console.log("success", data);
       const { location: { city, region, lat, lng, timezone }, isp, ip } = data;
