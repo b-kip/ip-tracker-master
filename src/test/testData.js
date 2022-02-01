@@ -84,4 +84,16 @@ const DOMAININFO = [
   },
 ];
 
-export {IPINFO, DOMAININFO}
+const NEGATIVE_PATH_INPUT_DATA = {
+  ip_address: [
+    "256.125.89.255", "255.125..255", "256.125.89.", "255.125.089.255",
+    "255189255", "255..125.89.255", "255.125.8a.255", "255.125.9%.255"
+  ],
+  domain:[
+    "twitter.c", "t.c", "tsc_d.com", "facebo ok.com", "dev - c.org",
+    "-youtube.com", "red@rt.net", "fb's.com", "dev", "devs,challenge.to",
+    "m&m.com", "mail..mybusiness.com"
+  ],
+}
+
+export {IPINFO, DOMAININFO, NEGATIVE_PATH_INPUT_DATA}
